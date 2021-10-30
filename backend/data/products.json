@@ -1,0 +1,53 @@
+[
+    {
+        "name":"SanDisk Ultra 128GB SDXC UHS-I Memory Card up to 80MB/s",
+        "description":"SanDisk SDHC and SDXC memory cards are great choices to capture and store your favorite pictures and videos on standard point and shoot cameras. SanDisk SDHC and SDXC memory cards are compatible with cameras, laptops, tablets.", 
+        "price":500,
+        "ratings":"4.5", 
+        "images":[
+            {
+                "public_id":"products/128go-memoire-carte-micro-sd-card-sandisk-memory-c.jpg", 
+                "url":"https://www.cdiscount.com/pdt2/4/0/8/1/700x700/san4802542469408/rw/128go-memoire-carte-micro-sd-card-sandisk-memory-c.jpg"
+            }
+        ], 
+         "category":"Electronics", 
+          "seller":"Ebay", 
+         "stock":50, 
+          "numOfReviews":32, 
+          "reviews":[]
+    }, 
+    {
+        "name":"Iphone 13",
+        "description":"Le meilleur écran d’iPhone jamais conçu, pour un contraste irréprochable et une résolution impressionnante. Doté du Ceramic Shield, qui multiplie par quatre la résistance aux chutes.", 
+        "price":1000,
+        "ratings":"4.5", 
+        "images":[
+            {
+                "public_id":"products/iphone-13-renders-5.jpg", 
+                "url":"https://www.journaldugeek.com/content/uploads/2021/09/iphone-13-renders-5.jpg"
+            }
+        ], 
+         "category":"Electronics", 
+          "seller":"Apple", 
+         "stock":100, 
+          "numOfReviews":32, 
+          "reviews":[]
+    }, 
+    {
+        "name":"OPPO",
+        "description":"Les smartphones Back Market sont livrés avec un chargeur compatible avec l'appareil. Pour lutter contre le gaspillage électronique, les écouteurs ne sont pas fournis avec le produit.", 
+        "price":500,
+        "ratings":"4.6", 
+        "images":[
+            {
+                "public_id":"products/test-oppo-a94-5g.jpg", 
+                "url":"https://www.lesmobiles.com/images/news_in/test-oppo-a94-5g.jpg"
+            }
+        ], 
+         "category":"Electronics", 
+          "seller":"OPPO Corporation", 
+         "stock":50, 
+          "numOfReviews":32, 
+          "reviews":[]
+    }    
+]
