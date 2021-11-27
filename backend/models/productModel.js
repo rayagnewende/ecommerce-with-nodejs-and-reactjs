@@ -37,6 +37,11 @@ const ProductModel = new mongoose.Schema({
 
         }
     ], 
+    user:{
+        type:mongoose.Schema.ObjectId, 
+        ref:'User',  
+        required:true
+    }, 
     category:{
         type:String, 
         required:[true, "Please select catgory for this product"], 

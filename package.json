@@ -4,17 +4,24 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start":"nodemon backend/server.js", 
-    "dev":"set NODE_ENV=DEVELOPPEMENT& nodemon backend/server", 
-    "prod":"set NODE_ENV=PRODUCTION& nodemon backend/server", 
-    "seeder":"node backend/utils/productsSeeder.js"
+    "start": "nodemon backend/server.js",
+    "dev": "set NODE_ENV=DEVELOPPEMENT& nodemon backend/server",
+    "prod": "set NODE_ENV=PRODUCTION& nodemon backend/server",
+    "seeder": "node backend/utils/productsSeeder.js"
   },
   "author": "KABORE Rayagnewende Evariste",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "crypto-js": "^4.1.1",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "mongoose": "^6.0.8"
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.8",
+    "nodemailer": "^6.7.1",
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.13"
