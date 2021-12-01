@@ -98,18 +98,20 @@ exports.forgotPassword = catchAsyncErrors( async (req, res, next) => {
 
          return next( new ErrorHandler(error.message, 500)) ; 
     }
-}). 
+}); 
+
+
 
 // réinitialiser le mot de password de l'tilisateur 
 
-exports.ResetPassword = catchAsyncErrors(async (req, res, next) => {
+exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
    // crypter le token 
    const resetPasswordToken = crypto.createHash('sha26').update(req.params.token).digest("hex")
 
    const user = await User.findOne({
        resetPasswordToken, 
        resetPasswordExpire:{ $gt:Date.now()}
-   }); 
+   });  
 
    if(!user)
    {
@@ -139,3 +141,110 @@ exports.logoutUser = catchAsyncErrors( async (req, res, next) => {
         message:"User logout ! "
     }); 
 })
+
+// récpérer les données de l'utilisateur courant 
+
+exports.getUserProfile = catchAsyncErrors(async (req, res, next) => {
+    const user = await User.findById(req.user.id); 
+    res.status(200).json({
+        success:true, 
+        user
+    }); 
+}); 
+
+// modification du password de l'utilisateur 
+
+exports.updateUserPassword = catchAsyncErrors(async (req, res, next) => {
+    const user = await User.findById(req.user.id).select("+password"); 
+
+    // vérifier si le password de l'utilisateur est bien le meme 
+    const ismatch = user.comparePasswords(req.body.password);
+    if(!ismatch)
+    {
+        return next(new ErrorHandler("le password ne correspond pas", 400)); 
+    }
+    user.password = req.body.password; 
+    await user.save(); 
+    sendToken(user,200, res); 
+}); 
+
+// modifier les informations de son profile 
+exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
+    const userData = {
+        name:req.body.name, 
+        email:req.body.email
+    };
+
+// update data 
+    await User.findByIdAndUpdate(req.user.id, userData, {
+        new:true, 
+        runValidators:true, 
+        useFindAndModify:false
+    }); 
+
+    res.status(200).json({
+        success:true
+    })
+})
+
+// récupérer la liste des utilisateurs 
+exports.getUsers = catchAsyncErrors( async (req, res, next) => {
+    const users = await User.find(); 
+
+    res.status(200).json({
+        success:true, 
+        users
+    }); 
+})
+
+// récupérer un user via son id
+exports.getUser = catchAsyncErrors( async (req, res, next) => {
+    const user = await User.findById(req.params.id); 
+    if(!user)
+    {
+        return next(new ErrorHandler(`User does not found via Id: ${req.params.id}`)); 
+    }
+
+    res.status(200).json({ 
+        success:true, 
+        user
+    }); 
+})
+
+// modifier les données de l'administrateur
+
+exports.updateUser = catchAsyncErrors( async (req,res,  next) => {
+    const userData = {
+        name:req.body.name, 
+        email:req.body.email, 
+        role:req.body.role
+    };
+
+// update data 
+    await User.findByIdAndUpdate(req.user.id, userData, {
+        new:true, 
+        runValidators:true, 
+        useFindAndModify:false
+    }); 
+
+    res.status(200).json({
+        success:true
+    })
+})
+
+// supprimer un user 
+exports.deleteUser = catchAsyncErrors(async (req, res,next) =>  {
+    const user = await User.findById(req.params.id); 
+
+    if(!user) 
+    {
+        return next(new ErrorHandler(' user does not found !', )); 
+    }
+
+    await user.remove(); 
+
+    res.status(200).json({
+        success:true, 
+
+    })
+}); 

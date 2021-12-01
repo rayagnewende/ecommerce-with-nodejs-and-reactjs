@@ -25,6 +25,31 @@ module.exports = (err, req, res, next) => {
             
         }); 
     }
+   
+    // gérer le message d'erreur concernant la duplication de clés
+  if( err.code === 11000)
+  {
+      const message = `Duplicate ${Object.keys(err.keyValue)}  is entered`; 
+      error = new ErrorHandler(message, 400); 
+
+  }
+// gérer le message d'erreur d'un jeton ou tekon 
+if( err.name === "JsonWebTokenError")
+{
+    const message = `Json web token  is invalid, try again`; 
+    error = new ErrorHandler(message, 400); 
+
+}
+
+if( err.name === "TokenExpiredError")
+{
+    const message = ` token  is expired , try again`; 
+    error = new ErrorHandler(message, 400); 
+
+}
+// gérer l'expiration des token 
+
+
 
 
     res.status(err.statusCode).json({
